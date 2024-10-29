@@ -1,0 +1,26 @@
+FROM node:alpine
+
+WORKDIR /workdir
+
+RUN apk add chromium
+RUN npm install -g @mermaid-js/mermaid-cli
+
+RUN apk update \
+    && apk upgrade \
+    && apk add bash curl openvpn openrc mdevd-openrc iptables \
+    && rm -rf /var/cache/apk/* \
+    && rc-update add openvpn default \
+    && echo "run" >> /etc/modules
+RUN sed -i '/getty/d' /etc/inittab
+
+WORKDIR /home/mmdc_user
+RUN addgroup -S mmdc_user && adduser -s /bin/bash -D -S mmdc_user -G mmdc_user -h /home/mmdc_user mmdc_user;echo 'mmdc_user:' | chpasswd
+
+RUN apk add --no-cache openssh 
+RUN echo 'PermitEmptyPasswords yes' >> /etc/ssh/sshd_config
+RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
+RUN echo 'UsePAM no' >> /etc/ssh/sshd_config
+RUN ssh-keygen -A
+EXPOSE 22
+
+ENTRYPOINT [ "/usr/sbin/sshd", "-D" ]

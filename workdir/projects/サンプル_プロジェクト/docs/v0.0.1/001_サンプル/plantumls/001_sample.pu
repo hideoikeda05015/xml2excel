@@ -1,0 +1,18 @@
+@startuml 001_sample
+title Title1
+
+hide empty description
+state 画面A {
+    [*] -> 設定画面
+    設定画面 --> 確認画面: 確認ボタン
+    確認画面 --> 設定画面: 戻るボタン
+}
+state 画面B {
+    [*] -> 実行中画面
+    実行中画面 -> 実行結果画面
+}
+
+[*] --> 画面A
+確認画面 --> 画面B: 実行ボタン
+実行結果画面 --> [*]
+@enduml

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- パラメーター チートシート
+sheet
+    @width_size: 全体の横幅セル数
+    @start_col: 横開始位置
+    @page_lr_padding: ページ全体の横パディング
+    @header_lr_padding: ヘッダーの横パディング
+    @body_lr_padding: 本文の横パディング
+    @inline_title_length: （ほぼ意味ない設定）
+    @font_size: フォントサイズ
+    @image_offset_calc_type: 「cell, anchor」画像の設置位置についての計算方式の決定。セル位置か、距離換算か。
+
+    header
+        doc_title
+            #text: テキスト設定のみ、改行は自動で行追加される
+        head
+            @key: テキスト設定可能
+            #text: テキスト設定可能
+
+    body 
+        section
+            @type = [desc, link, hierarchy, table, file, wireframe]
+            title
+                #text: テキスト設定のみ
+
+        section.type == "desc"
+            text
+                #text: テキスト設定のみ、改行は自動で行追加される
+
+        section.type == "link"
+            ul
+                li
+                    @title: タイトル設定
+                    link
+                        @value: テキスト設定可能
+
+        section.type == "hierarchy"
+            @is_hierarchy_number: 自動で階層構造に番号を振るかどうか
+            ul
+                @title: テキスト設定可能
+                li
+                    @title: タイトル設定
+                    ul: 繰り返し設定可能
+                    table: 設定できるタグは下記参照
+                    link
+                        @value: テキスト設定可能
+
+        section.type == "file"
+            file_list
+                @layout_size: 横の分割数
+                file
+                    @src: ファイルのリンク先設定「******.jpg」「******.png」「******.pu」「******.mmdc」
+                        : 「/」           => 絶対パス
+                        : 「~/」          => プロジェクトフォルダ
+                        : 「./」          => 「*****.xml」ファイルからの相対パス
+                        : 「../」         => 「*****.xml」ファイルからの相対パス
+                        : 「******.pu」   => 「PlantUML」のファイルをPNG形式に変換エクセルに保存
+                        : 「******.mmdc」 => 「Mermaid JS」のファイルをPNG形式に変換エクセルに保存
+
+        section.type == "flowchart"
+            participants
+                thread
+                    @id: 実行スレッドのIDを指定できる
+                    #text: テキスト設定可能
+            flow
+                task
+                    @by: どのスレッドで実行されるか
+                    @id: 別taskから戻すための参照値（現状は、「上に戻る」場合のみ対応してしている）
+                    @if: 条件記載が必要な場合には記載
+                    @ture: @ifパラメーターがある場合：条件に該当するならを記載する文言
+                    @false: @ifパラメーターがある場合：条件に該当しないならを記載する文言
+                    @false_to: @ifパラメーターがある場合：条件に該当しない場合、どの@idのtaskに戻すかを記載する
+
+        section.type == "table"
+            table: 設定できるタグは下記参照
+
+        section.type == "wireframe"
+            row
+                @is_border: 線を引くかどうか
+                @size: 縦の行数
+                @bottom_space: 下のスペース
+                @number: セル右上に出す番号画像
+                #text: テキスト設定可能
+            col
+                @is_border: 線を引くかどうか
+                @size: 割合数
+                @number: セル右上に出す番号画像
+                #text: テキスト設定可能
+            ※ row、colは互いにどちらも親、子の関係で記載できる
+
+        table
+            thead
+                tr
+                    th
+                        @length: 横セル数を設定。数字を設定しない場合、残りのセル数が設定される。
+                        @row_size: 縦行数
+                        @is_number: セル右上に出す番号画像（自動計算バージョンだが、ややこしくなりそうなので 破棄予定）
+                        #text: テキスト設定可能
+            tbody
+                tr
+                    td
+                        @length: 横セル数を設定。数字を設定しない場合、残りのセル数が設定される。
+                        @row_size: 縦行数
+                        @bg_color: greyのみ設定可能
+                        @text_align: left, center設定可能
+                        @is_row_merge: 1行をマージするかどうか
+                        @is_number: セル右上に出す番号画像（自動計算バージョンだが、ややこしくなりそうなので 破棄予定）
+                        @link: ハイパーリンク設定可能
+                        @sheet_link: ハイパーリンク設定可能（シート名のみ設定想定。「#●●●●●!A1」の添え字が付く）
+                        #text: テキスト設定可能
+-->
+<sheet 
+    width_size="76" 
+    page_lr_padding="1" 
+    header_lr_padding="1" 
+    body_lr_padding="1" 
+    image_offset_calc_type="cell">
+    <header>
+        <doc_title font_size="12">
+            本システムの概要
+        </doc_title>
+        <head key="バージョン">v0.0.1</head>
+        <head key="プロジェクト名">サンプル</head>
+    </header>
+    <body>
+        <section type="desc" id="001_desc">
+            <title>◎ 本システムの概要</title>
+            <text>
+                このサンプルでは、XMLからEXCELへの変換するため記載ルールなどの説明をまとめています。
+                この資料自体も本ツールを使って作成をしています。
+                本資料で表現しているレイアウトは全てXML中へ記載する構文にて出力可能になっています。
+            </text>
+        </section>
+        <section type="desc">
+            <title>◎ 設計書構成</title>
+            <text>
+                設計書の構成は、本システム用のタグを利用しておおよそ下記の構成で実装されます。
+                設定できるタグ、パラメーターなどは下記にまとめています。
+            </text>
+        </section>
+        <section type="wireframe">
+            <row is_border="True">
+                <col padding="1">
+                    <row bottom_space="1">
+                        &lt;sheet&gt;
+                    </row>
+                    <row is_border="True" size="3" bottom_space="1" number="1">
+                        &lt;header&gt;
+                    </row>
+                    <row is_border="True" number="2">
+                        <col padding="1">
+                            <row bottom_space="1">
+                                &lt;body&gt;
+                            </row>
+                            <row is_border="True" size="3">
+                                <col padding="1">
+                                    <row bottom_space="1">
+                                        &lt;section&gt; （複数可）
+                                    </row>
+                                    <row is_border="True" size="3" bottom_space="1">
+                                        &lt;title&gt;
+                                    </row>
+                                    <row is_border="True" size="5">
+                                        &lt;section&gt;内部に記載されるパラメーターないし
+                                        タグ内容に従って描画されます
+                                    </row>
+                                </col>
+                            </row>
+                        </col>
+                    </row>
+                </col>
+            </row>
+        </section>
+        <section type="table">
+            <title>◎ 「&lt;sheet&gt;タグ」 設定可能パラメータ・タグ</title>
+            <table>
+                <thead>
+                    <th length="3">No.</th>
+                    <th length="12" row_size="2">設定可能パラメーター名</th>
+                    <th length="6">デフォルト値</th>
+                    <th length="10">入力種別</th>
+                    <th length="">備考</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>width_size</td>
+                        <td>72</td>
+                        <td>34以上の数字</td>
+                        <td>ページ中の横幅の設定値になります。</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>page_lr_padding</td>
+                        <td>1</td>
+                        <td>0以上の数字</td>
+                        <td>ページ横の左右隙間セル数の設定。ヘッダー、ボディー両方に影響する。</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>header_lr_padding</td>
+                        <td>1</td>
+                        <td>0以上の数字</td>
+                        <td>ページ横の左右隙間セル数の設定。ヘッダーに影響する。</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>body_lr_padding</td>
+                        <td></td>
+                        <td>1</td>
+                        <td>0以上の数字</td>
+                        <td>ページ横の左右隙間セル数の設定。ボディーに影響する。</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>inline_title_length</td>
+                        <td>1</td>
+                        <td>1以上の数字</td>
+                        <td>
+                            設計書中の各「「&lt;section&gt;」タグ」中で表現されるタイトルの
+                            横幅の値になります。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bg_color="grey"></td>
+                        <td bg_color="grey">start_col</td>
+                        <td bg_color="grey">1</td>
+                        <td bg_color="grey">1以上の数字</td>
+                        <td bg_color="grey">start_col 改ページ用の値、基本はいじらない想定だが、デバッグ用に利用中。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section type="table">
+            <table>
+                <thead>
+                    <th length="3">No.</th>
+                    <th length="8">設定可能タグ名</th>
+                    <th length="8">最低必要数</th>
+                    <th length="5">上限数</th>
+                    <th length="10">リンク先</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>&lt;header&gt;</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>リンク</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>&lt;body&gt;</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>リンク</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section type="desc">
+            <text>
+                他タグなどの説明は「001_表紙.xml」中のコメントアウト部分「チートシート」を参考ください。
+            </text>
+        </section>
+    </body>
+</sheet>

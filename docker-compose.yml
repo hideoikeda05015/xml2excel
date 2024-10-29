@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  jupyterlab:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jupyterlab
+    working_dir: '/workdir'
+    tty: true
+    volumes:
+      - ./workdir:/workdir
+    ports:
+      - "8080:8080"
+    command: jupyter-lab --ip 0.0.0.0 --port=8080 --allow-root --no-browser --NotebookApp.token='' --ContentsManager.allow_hidden=True --FileContentsManager.checkpoints_kwargs="root_dir"="/tmp/ipynb_checkpoints"
+  app: 
+    container_name: node  
+    build:
+      context: .   # ビルドコンテキスト
+      dockerfile: Dockerfile_node   # Dockerfileのディレクトリ
+    volumes:
+      - ./workdir:/workdir
+    tty: true   

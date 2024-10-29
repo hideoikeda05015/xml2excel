@@ -1,0 +1,1328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- パラメーター チートシート
+sheet
+    @width_size: 全体の横幅セル数
+    @start_col: 横開始位置
+    @page_lr_padding: ページ全体の横パディング
+    @header_lr_padding: ヘッダーの横パディング
+    @body_lr_padding: 本文の横パディング
+    @inline_title_length: （ほぼ意味ない設定）
+    @font_size: フォントサイズ
+    @image_offset_calc_type: 「cell, anchor」画像の設置位置についての計算方式の決定。セル位置か、距離換算か。
+
+    header
+        doc_title
+            #text: テキスト設定のみ、改行は自動で行追加される
+        head
+            @key: テキスト設定可能
+            #text: テキスト設定可能
+
+    body 
+        section
+            @type = [desc, link, hierarchy, table, file, wireframe]
+            title
+                #text: テキスト設定のみ
+
+        section.type == "desc"
+            text
+                #text: テキスト設定のみ、改行は自動で行追加される
+
+        section.type == "link"
+            ul
+                li
+                    @title: タイトル設定
+                    link
+                        @value: テキスト設定可能
+
+        section.type == "hierarchy"
+            @is_hierarchy_number: 自動で階層構造に番号を振るかどうか
+            ul
+                @title: テキスト設定可能
+                li
+                    @title: タイトル設定
+                    ul: 繰り返し設定可能
+                    table: 設定できるタグは下記参照
+                    link
+                        @value: テキスト設定可能
+
+        section.type == "file"
+            file_list
+                @layout_size: 横の分割数
+                file
+                    @src: ファイルのリンク先設定「******.jpg」「******.png」「******.pu」「******.mmdc」
+                        : 「/」           => 絶対パス
+                        : 「~/」          => プロジェクトフォルダ
+                        : 「./」          => 「*****.xml」ファイルからの相対パス
+                        : 「../」         => 「*****.xml」ファイルからの相対パス
+                        : 「******.pu」   => 「PlantUML」のファイルをPNG形式に変換エクセルに保存
+                        : 「******.mmdc」 => 「Mermaid JS」のファイルをPNG形式に変換エクセルに保存
+
+        section.type == "flowchart"
+            participants
+                thread
+                    @id: 実行スレッドのIDを指定できる
+                    #text: テキスト設定可能
+            flow
+                task
+                    @by: どのスレッドで実行されるか
+                    @id: 別taskから戻すための参照値（現状は、「上に戻る」場合のみ対応してしている）
+                    @if: 条件記載が必要な場合には記載
+                    @ture: @ifパラメーターがある場合：条件に該当するならを記載する文言
+                    @false: @ifパラメーターがある場合：条件に該当しないならを記載する文言
+                    @false_to: @ifパラメーターがある場合：条件に該当しない場合、どの@idのtaskに戻すかを記載する
+
+        section.type == "table"
+            table: 設定できるタグは下記参照
+
+        section.type == "wireframe"
+            row
+                @is_border: 線を引くかどうか
+                @size: 縦の行数
+                @bottom_space: 下のスペース
+                @number: セル右上に出す番号画像
+                #text: テキスト設定可能
+            col
+                @is_border: 線を引くかどうか
+                @size: 割合数
+                @number: セル右上に出す番号画像
+                #text: テキスト設定可能
+            ※ row、colは互いにどちらも親、子の関係で記載できる
+
+        table
+            thead
+                tr
+                    th
+                        @length: 横セル数を設定。数字を設定しない場合、残りのセル数が設定される。
+                        @row_size: 縦行数
+                        @is_number: セル右上に出す番号画像（自動計算バージョンだが、ややこしくなりそうなので 破棄予定）
+                        #text: テキスト設定可能
+            tbody
+                tr
+                    td
+                        @length: 横セル数を設定。数字を設定しない場合、残りのセル数が設定される。
+                        @row_size: 縦行数
+                        @bg_color: greyのみ設定可能
+                        @text_align: left, center設定可能
+                        @is_row_merge: 1行をマージするかどうか
+                        @is_number: セル右上に出す番号画像（自動計算バージョンだが、ややこしくなりそうなので 破棄予定）
+                        @link: ハイパーリンク設定可能
+                        @sheet_link: ハイパーリンク設定可能（シート名のみ設定想定。「#●●●●●!A1」の添え字が付く）
+                        #text: テキスト設定可能
+-->
+<sheet 
+    width_size="78"
+    header_lr_padding="1"
+    body_lr_padding="1"
+    inline_title_length="15"
+    image_offset_calc_type="cell" 
+>
+    <color_list>
+        <color key="grey">F0F0F0</color>
+    </color_list>
+    <header>
+        <doc_title font_size="12">横幅:51, padding(page:1, header:1, body:1)</doc_title>
+        <head key="バージョン">v0.0.1</head>
+        <head key="プロジェクト名">利用サンプル</head>
+        <head key="システム名">その1</head>
+        <head key="サブシステム名">その2</head>
+        <head key="設計書タイトル">その3</head>
+    </header>
+    <body>
+        <section type="file">
+            <title>図作成などで使える dio.pngの作り方</title>
+            <file_list layout_size="1">
+                <file src="/workdir/SAMPLE.dio.png" />
+            </file_list>
+        </section>
+        <section type="flowchart">
+            <title>◎ フローチャート テスト</title>
+            <flowchart base_width_cell="16">
+                <participants>
+                    <thread id="担当者">
+                        カスタマーサポート課
+                        担当者
+                    </thread>
+                    <thread id="営業部">
+                        営業部
+                        担当者
+                    </thread>
+                    <thread id="お客様">お客様</thread>
+                </participants>
+                <flow>
+                    <task by="お客様">お問い合わせ番号</task>
+                    <task by="担当者" id="cstm003">受電対応</task>
+                    <task by="担当者" id="cstm002" if="営業確認が必要" true="営業に確認した場合" false="確認できなかった場合">
+                        <task by="担当者" id="cstm001">
+                            営業に確認が必要
+                            電話及びメールで確認
+                        </task>
+                        <task by="営業部">回答</task>
+                        <task by="担当者" if="解決した" true="no" false="yes" false_to="cstm002"></task>
+                        <task by="営業部">回答</task>
+                        <task by="お客様">回答</task>
+                        <task by="担当者" if="解決した" true="no" false="yes" false_to="cstm003"></task>
+                        <task by="担当者" if="解決した" true="no" false="yes" false_to="cstm001"></task>
+                    </task>
+                    <task by="担当者">終了</task>
+                    <task by="担当者">終了</task>
+                </flow>
+            </flowchart>
+        </section>
+        <section type="desc">
+            <title>◎ 「&lt;header&gt;」タグの概要</title>
+            <text>
+                シート中のヘッダー部分に記載。タイトルなどを設定する際に利用するタグになります。
+                設定は任意になります。
+            </text>
+        </section>
+        <section type="table">
+            <title>◎ 設定可能パラメーター</title>
+            <table>
+                <thead>
+                    <th length="3">No.</th>
+                    <th length="14">項目名</th>
+                    <th length="8">デフォルト値</th>
+                    <th length="10">入力種別</th>
+                    <th length="">備考</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td row_size="2" text_align="center" is_row_merge="True">
+                            設定できるパラメーターはありません
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section type="table">
+            <title>◎ 設定可能タグ</title>
+            <table>
+                <thead>
+                    <th length="3">No.</th>
+                    <th length="8">項目名</th>
+                    <th length="8">最低必要数</th>
+                    <th length="5">上限数</th>
+                    <th length="">説明</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>&lt;doc_title&gt;</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>
+                            テキストのみ設定できます。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>&lt;head&gt;</td>
+                        <td>0</td>
+                        <td>8</td>
+                        <td>
+                            設計書右上にカテゴリ表現できるタグになります。
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section type="desc"><!-- 階層無し_説明欄 -->
+            <title>◎ 「&lt;header&gt;●●●●&lt;/header&gt;」テキスト設定について</title>
+            <text>
+                テキストは設定できません。
+                設定可能なタグのみ設定ください。
+            </text>
+        </section>
+        <!--section type="file">
+            <title>◎ 構築サンプル</title>
+            <file_list layout_size="1">
+                <file src="./images/101_headerタグ/headerイメージ.png" />
+                <file src="./plantumls/002_sample.pu" />
+                <file src="./mermaids/001_sample.mmdc" />
+            </file_list>
+        </section-->
+        <section type="flowchart">
+            <title>◎ フローチャート テスト</title>
+            <flowchart>
+                <participants>
+                    <thread id="担当者">
+                        カスタマーサポート課
+                        担当者
+                    </thread>
+                    <thread id="営業部">
+                        営業部
+                        担当者
+                    </thread>
+                    <thread id="お客様">お客様</thread>
+                </participants>
+                <flow>
+                    <task by="お客様">お問い合わせ番号</task>
+                    <task by="担当者">終了</task>
+                </flow>
+            </flowchart>
+        </section>
+        <section type="flowchart">
+            <title>◎ フローチャート テスト</title>
+            <flowchart>
+                <participants>
+                    <thread id="担当者">
+                        カスタマーサポート課
+                        担当者
+                    </thread>
+                    <thread id="営業部">
+                        営業部
+                        担当者
+                    </thread>
+                    <thread id="お客様">お客様</thread>
+                </participants>
+                <flow>
+                    <task by="お客様">お問い合わせ番号</task>
+                    <task by="担当者">終了</task>
+                    <task by="担当者">終了</task>
+                </flow>
+            </flowchart>
+        </section>
+        <section type="desc"><!-- 階層無し_説明欄 -->
+            <title>◎ 「&lt;sheet&gt;」タグの概要</title>
+            <text>
+                シート単位の基本的な構成などを設定できるタグ。
+                XMLファイル中に必ず1つ設定ください。
+            </text>
+        </section>
+        <section type="table">
+            <title>◎ 設定可能パラメーター</title>
+            <table>
+                <thead>
+                    <th length="3">No.</th>
+                    <th length="14">項目名</th>
+                    <th length="8">デフォルト値</th>
+                    <th length="10">入力種別</th>
+                    <th length="">備考</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>width_size</td>
+                        <td>72</td>
+                        <td>34以上の数字</td>
+                        <td>ページ中の横幅の設定値になります。</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>page_lr_padding</td>
+                        <td>1</td>
+                        <td>0以上の数字</td>
+                        <td>
+                            ページ横の左右隙間セル数の設定。
+                            ヘッダー、ボディー両方に影響する。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>header_lr_padding</td>
+                        <td>1</td>
+                        <td>0以上の数字</td>
+                        <td>ページ横の左右隙間セル数の設定。ヘッダーに影響する。</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>body_lr_padding</td>
+                        <td>1</td>
+                        <td>0以上の数字</td>
+                        <td>ページ横の左右隙間セル数の設定。ボディーに影響する。</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>inline_title_length</td>
+                        <td>1</td>
+                        <td>1以上の数字</td>
+                        <td>
+                            設計書中の各「「&lt;section&gt;」タグ」中で表現されるタイトルの
+                            横幅の値になります。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bg_color="grey"></td>
+                        <td bg_color="grey">start_col</td>
+                        <td bg_color="grey">1</td>
+                        <td bg_color="grey">1以上の数字</td>
+                        <td bg_color="grey">
+                            start_col 改ページ用の値、基本はいじらない想定だが、
+                            デバッグ用に利用中。
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section type="table">
+            <title>◎ 設定可能タグ</title>
+            <table>
+                <thead>
+                    <th length="3">No.</th>
+                    <th length="8">項目名</th>
+                    <th length="8">最低必要数</th>
+                    <th length="5">上限数</th>
+                    <th length="10">リンク先</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>&lt;header&gt;</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>リンク</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>&lt;body&gt;</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>リンク</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section type="desc"><!-- 階層無し_説明欄 -->
+            <title>◎ 「&lt;sheet&gt;●●●●&lt;/sheet&gt;」テキスト設定について</title>
+            <text>
+                テキストは設定できません。
+                設定可能なタグのみ設定ください。
+            </text>
+        </section>
+        <section type="wireframe">
+            <title>ワイヤーフレームサンプル</title>
+            <row is_border="True" size="3">
+                ヘッダー部分
+            </row>
+            <row>
+                <col size="3" is_border="True">
+                    <row is_border="True" size="2">メニュー部分</row>
+                    <row is_border="True" size="2">ホーム</row>
+                    <row is_border="True" size="2">ユーザー管理</row>
+                    <row is_border="True" size="2">ブログ管理</row>
+                    <row is_border="True" size="2">新着管理</row>
+                    <row is_border="True" size="2">スケジュール管理</row>
+                    <row is_border="True" size="2">帳票管理</row>
+                    <row is_border="True" size="2">マスタ管理</row>
+                    <row is_border="True" size="2" bottom_space="2">ログ管理</row>
+                    <row is_border="True" size="2">ログアウト</row>
+                </col>
+                <col size="9">
+                    <row is_border="True" size="3">
+                        検索部分
+                    </row>
+                    <row is_border="True" size="20">
+                        <col padding="1">
+                            <row bottom_space="1">テーブル部分</row>
+                            <row bottom_space="1">データがない場合</row>
+                            <row bottom_space="2">
+                                <table>
+                                    <thead>
+                                        <th length="5">番号</th>
+                                        <th length="10">ユーザー名</th>
+                                        <th length="">備考</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td row_size="2" text_align="center" is_row_merge="True">
+                                                設定されているデータはありません
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </row>
+                            <row bottom_space="1">データがある場合</row>
+                            <row>
+                                <table>
+                                    <thead>
+                                        <th length="5">番号</th>
+                                        <th length="10">ユーザー名</th>
+                                        <th length="">備考</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>田中 鈴木</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>佐藤 高橋</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </row>
+                        </col>
+                    </row>
+                    <row is_border="True" size="3">
+                        ページャー部分
+                    </row>
+                </col>
+            </row>
+        </section>
+        <section type="desc"><!-- 階層無し_説明欄 -->
+            <title>本システムの概要</title>
+            <text>
+                このサンプルでは、XMLからEXCELへの変換するための説明をまとめています。
+                この資料自体も該当のツールを使って作成をしています。
+            </text>
+        </section>
+        <section type="hierarchy" is_hierarchy_number="False"><!-- 階層型_説明欄 -->
+            <title>本システムのXML記載時に利用できるTagについて</title>
+            <ul>
+                <li>
+                    <ul title="「&lt;sheet&gt;」タグ" bottom_space="1">
+                        <li>Excelファイルへの出力時の構成情報などを設定します。</li>
+                        <li>
+                            <ul title="◎ 設定可能パラメーター">
+                                <li>
+                                    <table>
+                                        <thead>
+                                            <th length="3">No.</th>
+                                            <th length="8">項目名</th>
+                                            <th length="4">設定要否</th>
+                                            <th length="6">デフォルト値</th>
+                                            <th length="10">入力種別</th>
+                                            <th length="">備考</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>width_size</td>
+                                                <td></td>
+                                                <td>72</td>
+                                                <td>34以上の数字</td>
+                                                <td>ページ中の横幅の設定値になります。</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>page_lr_padding</td>
+                                                <td></td>
+                                                <td>1</td>
+                                                <td>0以上の数字</td>
+                                                <td>ページ横の左右隙間セル数の設定。ヘッダー、ボディー両方に影響する。</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>header_lr_padding</td>
+                                                <td></td>
+                                                <td>1</td>
+                                                <td>0以上の数字</td>
+                                                <td>ページ横の左右隙間セル数の設定。ヘッダーに影響する。</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>body_lr_padding</td>
+                                                <td></td>
+                                                <td>1</td>
+                                                <td>0以上の数字</td>
+                                                <td>ページ横の左右隙間セル数の設定。ボディーに影響する。</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>inline_title_length</td>
+                                                <td></td>
+                                                <td>1</td>
+                                                <td>1以上の数字</td>
+                                                <td>
+                                                    設計書中の各「「&lt;section&gt;」タグ」中で表現されるタイトルの
+                                                    横幅の値になります。
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>start_col</td>
+                                                <td></td>
+                                                <td>1</td>
+                                                <td>1以上の数字</td>
+                                                <td>start_col 改ページ用の値、基本はいじらない想定だが、デバッグ用に利用中。</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul title="◎ 設定可能タグ">
+                                <li>
+                                    <table>
+                                        <thead>
+                                            <th length="3">No.</th>
+                                            <th length="8">項目名</th>
+                                            <th length="5">必要数</th>
+                                            <th length="5">上限数</th>
+                                            <th length="14">許可タグ or 入力可能な内容</th>
+                                            <th length="">備考</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>header</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>【「&lt;header&gt;」タグ】にて説明</td>
+                                                <td>設計書上部のタイトルなどを設定できます。</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>body</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>【「&lt;body&gt;」タグ】にて説明</td>
+                                                <td>設計書本体を記載できます。</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul title="「&lt;header&gt;」タグ" bottom_space="1">
+                        <li>設計書の上部に記載される、タイトルなどの情報を設定いたします。</li>
+                        <li>
+                            <ul title="◎ 設定可能パラメーター">
+                                <li>
+                                    <table>
+                                        <thead>
+                                            <th length="3">No.</th>
+                                            <th length="8">項目名</th>
+                                            <th length="4">設定要否</th>
+                                            <th length="6">デフォルト値</th>
+                                            <th length="10">入力種別</th>
+                                            <th length="">備考</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td text_align="center" is_row_merge="True">設定可能なパラメーターは無し</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul title="◎ 設定可能タグ">
+                                <li>
+                                    <table>
+                                        <thead>
+                                            <th length="3">No.</th>
+                                            <th length="8">項目名</th>
+                                            <th length="5">必要数</th>
+                                            <th length="5">上限数</th>
+                                            <th length="14">許可タグ or 入力可能な内容</th>
+                                            <th length="">備考</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>title</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>テキストのみ</td>
+                                                <td>設計書上部のタイトルを設定できます。</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>head</td>
+                                                <td>0</td>
+                                                <td>8</td>
+                                                <td>テキストのみ</td>
+                                                <td>設計書上部の右側に最大8個まで設定が可能です。</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul title="「&lt;body&gt;」タグ" bottom_space="1">
+                        <li>設計書の内部構成が記載されるタグになります。</li>
+                        <li>
+                            <ul title="◎ 設定可能パラメーター">
+                                <li>
+                                    <table>
+                                        <thead>
+                                            <th length="3">No.</th>
+                                            <th length="8">項目名</th>
+                                            <th length="4">設定要否</th>
+                                            <th length="6">デフォルト値</th>
+                                            <th length="10">入力種別</th>
+                                            <th length="">備考</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td 
+                                                    text_align="center" 
+                                                    is_row_merge="True" 
+                                                    bg_color="grey">設定可能なパラメーターは無し</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul title="◎ 設定可能タグ">
+                                <li>
+                                    <table>
+                                        <thead>
+                                            <th length="3">No.</th>
+                                            <th length="8">項目名</th>
+                                            <th length="5">必要数</th>
+                                            <th length="5">上限数</th>
+                                            <th length="14">許可タグ or 入力可能な内容</th>
+                                            <th length="">備考</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>section</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>（調整中）</td>
+                                                <td>設計書のカテゴリ毎の記載枠になります。</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul title="「&lt;section&gt;」タグ">
+                        <li>設計書の内部構成が記載されるタグになります。</li>
+                        <li>利用方法が多岐にわたるため、サンプルのXMLをご覧ください。</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section type="link"><!-- 1階層_リンク集 -->
+            <title>関連リンク</title>
+            <ul>
+                <li title="README">
+                    <link value="http://localhost:8080/lab/tree/README.ipynb" />
+                </li>
+            </ul>
+        </section>
+        <section type="table"><!-- 1カテゴリ_テーブル -->
+            <title>更新一覧</title>
+            <table>
+                <thead>
+                    <th length="7">更新日</th>
+                    <th length="10">更新者</th>
+                    <th length="27">更新理由</th>
+                    <th length="">更新箇所</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024/05/21</td>
+                        <td>山田太郎</td>
+                        <td>初版作成</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section type="file">
+            <title>図作成などで使える dio.pngの作り方</title>
+            <file_list layout_size="1">
+                <file src="/workdir/SAMPLE.dio.png" />
+            </file_list>
+        </section>
+        <section type="wireframe"><!-- width_cell_size: 12の倍数が便利 -->
+            <title>ワイヤーフレームサンプル（tableタグ検証タイプ）</title>
+            <row is_border="True">
+                <table>
+                    <thead>
+                        <th length="7">更新日</th>
+                        <th length="10">更新者</th>
+                        <th length="">更新箇所</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024/05/21</td>
+                            <td>田中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2024/05/30</td>
+                            <td>鈴木</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </row>
+            <row is_border="True">
+                <col padding="1">
+                    <row is_border="True">
+                        <table>
+                            <thead>
+                                <th length="7">更新日</th>
+                                <th length="10">更新者</th>
+                                <th length="">更新箇所</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2024/05/21</td>
+                                    <td>田中</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2024/05/30</td>
+                                    <td>鈴木</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </row>
+                </col>
+                <col padding="1">
+                    <row is_border="True">
+                        <table>
+                            <thead>
+                                <th length="7">更新日</th>
+                                <th length="10">更新者</th>
+                                <th length="">更新箇所</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2024/05/21</td>
+                                    <td>田中</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2024/05/30</td>
+                                    <td>鈴木</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </row>
+                </col>
+            </row>
+            <row is_border="True">
+                <table>
+                    <thead>
+                        <th length="7">更新日</th>
+                        <th length="10">更新者</th>
+                        <th length="">更新箇所</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024/05/21</td>
+                            <td>田中</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2024/05/30</td>
+                            <td>鈴木</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </row>
+            <row is_border="True"></row>
+            <row is_border="True"></row>
+            <row is_border="True"></row>
+        </section>
+        <!--section type="wireframe" width_cell_size="72" default_row_padding="1" default_col_padding="1">
+            <title>ワイヤーフレームテスト</title>
+            <row is_debug="True">
+                <col is_debug="True">
+                    <row is_debug="True">
+                        <col is_debug="True"></col>
+                        <col is_debug="True">
+                            <row is_debug="True"></row>
+                            <row is_debug="True"></row>
+                            <row is_debug="True"></row>
+                            <row is_debug="True"></row>
+                            <row is_debug="True"></row>
+                            <row is_debug="True"></row>
+                        </col>
+                        <col is_debug="True"></col>
+                    </row>
+                    <row is_debug="True"></row>
+                </col>
+                <col is_debug="True">
+                    <row is_debug="True">
+                        <col is_debug="True"></col>
+                        <col is_debug="True"></col>
+                        <col is_debug="True">
+                            <row is_debug="True"></row>
+                            <row is_debug="True"></row>
+                            <row is_debug="True"></row>
+                            <row is_debug="True"></row>
+                        </col>
+                        <col is_debug="True">
+                            <row is_debug="True">
+                                <col is_debug="True"></col>
+                                <col is_debug="True"></col>
+                            </row>
+                            <row is_debug="True">
+                                <col is_debug="True"></col>
+                                <col is_debug="True"></col>
+                            </row>
+                            <row is_debug="True">
+                                <col is_debug="True"></col>
+                                <col is_debug="True"></col>
+                            </row>
+                            <row is_debug="True">
+                                <col is_debug="True"></col>
+                                <col is_debug="True"></col>
+                            </row>
+                            <row is_debug="True">
+                                <col is_debug="True"></col>
+                                <col is_debug="True"></col>
+                            </row>
+                            <row is_debug="True">
+                                <col is_debug="True"></col>
+                                <col is_debug="True"></col>
+                            </row>
+                            <row is_debug="True">
+                                <col is_debug="True"></col>
+                                <col is_debug="True"></col>
+                            </row>
+                            <row is_debug="True">
+                                <col is_debug="True"></col>
+                                <col is_debug="True"></col>
+                            </row>
+                            <row is_debug="True">
+                                <col is_debug="True"></col>
+                                <col is_debug="True"></col>
+                            </row>
+                        </col>
+                        <col is_debug="True"></col>
+                        <col is_debug="True"></col>
+                    </row>
+                </col>
+                <col is_debug="True"></col>
+            </row>
+        </section-->
+        <section type="file">
+            <title>ファイル一覧</title>
+            <file_list layout_size="2">
+                <file src="./images/purple.png" />
+                <file src="./images/green.png" />
+                <file src="./images/blue.png" />
+            </file_list>
+        </section>
+        <!--section type="file">
+            <title>ファイル一覧</title>
+            <file_list layout_size="2">
+                <file src="./images/purple.png" />
+                <file src="./images/green.png" />
+                <file src="./images/blue.png" />
+                <file src="./plantumls/001_sample.pu" />
+                <file src="./images/green.png" />
+                <file src="./dio_pngs/001_sample.dio.png" />
+                <file src="./plantumls/001_sample.pu" />
+                <file src="./plantumls/002_sample.pu" />
+                <file src="./images/green.png" />
+                <file src="./images/blue.png" />
+                <file src="./images/purple.png" />
+                <file src="./images/red.png" />
+                <file src="./images/blue.png" />
+                <file src="./images/purple.png" />
+            </file_list>
+        </section-->
+        <section type="desc"><!-- 階層無し_説明欄 -->
+            <title>本システムの概要</title>
+            <text>
+                このサンプルでは、XMLからEXCELへの変換機能を提供します
+                このサンプルでは、XMLからEXCELへの変換機能を提供します
+                このサンプルでは、XMLからEXCELへの変換機能を提供します
+                このサンプルでは、XMLからEXCELへの変換機能を提供します
+                このサンプルでは、XMLからEXCELへの変換機能を提供します
+                このサンプルでは、XMLからEXCELへの変換機能を提供します
+                このサンプルでは、XMLからEXCELへの変換機能を提供します
+            </text>
+        </section>
+        <section type="link"><!-- 1階層_リンク集 -->
+            <title>関連リンク1</title>
+            <ul>
+                <li title="google drive">
+                </li>
+                <li title="miro">
+                    <link value="https:/miro.com/1" />
+                </li>
+                <li title="Backlog">
+                    <link value="https://www.amazon.co.jp/" />
+                    <link value="https://backlog-2.com" />
+                    <link value="https://backlog-3.com" />
+                </li>
+            </ul>
+        </section>
+        <section type="hierarchy" is_hierarchy_number="True"><!-- 階層型_説明欄 -->
+            <title>処理一覧</title>
+            <ul>
+                <li>1. 初期処理1</li>
+                <li>
+                    <ul title="test">
+                        <li>
+                            <table>
+                                <thead>
+                                    <th length="7">更新日</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2021/01/06</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>パスコード初期設定画面を表示する</li>
+                        <li>①設定する ボタン押下時</li>
+                        <li>
+                            <ul>
+                                <li>パスコード設定画面に遷移する</li>
+                                <li>パスコード設定画面に遷移する</li>
+                            </ul>
+                        </li>
+                        <li>①設定する ボタン押下時</li>
+                    </ul>
+                </li>
+                <li>③ボタンタップ時</li>
+                <li>
+                    <ul>
+                        <li>タップした数値を左から② に表示する</li>
+                        <li>
+                            <table>
+                                <thead>
+                                    <th length="7">
+                                        更新日1
+                                    </th>
+                                    <th length="10">更新日2</th>
+                                    <th length="13">更新日3</th>
+                                    <th length="8">更新日4</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2021/01/06</td>
+                                        <td>2021/01/07</td>
+                                        <td>2021/01/08</td>
+                                        <td>2021/01/09</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2021/01/16</td>
+                                        <td>2021/01/17</td>
+                                        <td>2021/01/18</td>
+                                        <td>2021/01/19</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>1. 初期処理1</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li>
+                            <ul title="123テストテスト">
+                                <li>
+                                    <table>
+                                        <thead>
+                                            <th length="7">
+                                                更新日1
+                                            </th>
+                                            <th length="5">
+                                                更新日2
+                                                更新日2
+                                                更新日2
+                                                更新日2
+                                            </th>
+                                            <th length="">
+                                                更新日3更新日3更新日3更新日3更新日3更新日3更新日3
+                                                更新日3
+                                                更新日3
+                                                更新日3
+                                                更新日3
+                                                更新日3
+                                                更新日3
+                                            </th>
+                                            <th length="5"></th>
+                                            <th length="10">更新日4</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td>2021/01/08</td>
+                                                <td>
+                                                    2021/01/062021/01/062021/01/062021/01/062021/01/062021/01/06
+                                                    2021/01/06
+                                                    2021/01/06
+                                                    2021/01/06
+                                                    2021/01/06
+                                                    2021/01/06
+                                                </td>
+                                                <td>2021/01/09</td>
+                                                <td>2021/01/10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2021/01/16</td>
+                                                <td>
+                                                    2021/01/06
+                                                    2021/01/06
+                                                    2021/01/06
+                                                    2021/01/06
+                                                    2021/01/06
+                                                    2021/01/06
+                                                    2021/01/06
+                                                    2021/01/06
+                                                </td>
+                                                <td>2021/01/18</td>
+                                                <td>2021/01/19</td>
+                                                <td>2021/01/20</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>1. 初期処理1</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section type="plantuml" layout="2">
+            <title>PlantUML テスト 2</title>
+            <list>
+            </list>
+        </section>
+        <section type="link"><!-- 1階層_リンク集 -->
+            <title>関連リンク2</title>
+            <ul>
+            </ul>
+        </section>
+        <section type="desc"><!-- 階層無し_説明欄 -->
+            <title>要件概要1</title>
+        </section>
+        <section type="desc"> <!-- 階層無し_説明欄 -->
+            <title>要件概要3</title>
+            <text></text>
+        </section>
+        <section type="link"><!-- 1階層_リンク集 -->
+            <title>関連リンク1</title>
+            <ul>
+                <li title="google drive">
+                </li>
+                <li title="miro">
+                    <link value="https:/miro.com/1" />
+                </li>
+                <li title="Backlog">
+                    <link value="https://www.amazon.co.jp/" />
+                    <link value="https://backlog-2.com" />
+                    <link value="https://backlog-3.com" />
+                    <link value="https://www.amazon.co.jp/" />
+                    <link value="https://backlog-2.com" />
+                    <link value="https://backlog-3.com" />
+                    <link value="https://www.amazon.co.jp/" />
+                    <link value="https://backlog-2.com" />
+                    <link value="https://backlog-3.com" />
+                </li>
+            </ul>
+        </section>
+        <section type="link"><!-- 1階層_リンク集 -->
+            <title>関連リンク124652</title>
+            <ul></ul>
+        </section>
+        <section type="link"><!-- 1階層_リンク集 -->
+            <title>関連リンク124652</title>
+            <ul></ul>
+        </section>
+        <section type="hierarchy"><!-- 階層型_説明欄 -->
+            <title>処理一覧 パターン2</title>
+        </section>
+        <section type="hierarchy"><!-- 階層型_説明欄 -->
+            <ul></ul>
+        </section>
+        <section type="hierarchy" is_hierarchy_number="False"><!-- 階層型_説明欄 -->
+            <title>処理一覧 パターン4</title>
+            <ul bottom_space="5">
+                <li>1. 初期処理1</li>
+                <li>1. 初期処理1</li>
+                <li>
+                    <table>
+                        <thead>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </li>
+                <li>1. 初期処理1</li>
+                <li>
+                    <table>
+                    </table>
+                </li>
+                <li>1. 初期処理1</li>
+                <li>
+                    <table>
+                        <thead>
+                            <th length="7">更新日</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <table>
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2021/01/06</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <table>
+                        <thead>
+                            <th length="7">更新日1</th>
+                            <th length="7">更新日2</th>
+                            <th length="7">更新日3</th>
+                            <th length="7">更新日4</th>
+                            <th length="7">更新日5</th>
+                            <th length="7">更新日6</th>
+                            <th length="7">更新日7</th>
+                            <th length="7">更新日8</th>
+                            <th length="7">更新日9</th>
+                            <th length="7">更新日10</th>
+                            <th length="7">更新日11</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2021/01/01</td>
+                                <td>2021/01/02</td>
+                                <td>2021/01/03</td>
+                                <td>2021/01/04</td>
+                                <td>2021/01/05</td>
+                                <td>2021/01/06</td>
+                                <td>2021/01/07</td>
+                                <td>2021/01/08</td>
+                                <td>2021/01/09</td>
+                                <td>2021/01/010</td>
+                                <td>2021/01/011</td>
+                            </tr>
+                            <tr>
+                                <td>2021/01/01</td>
+                                <td>2021/01/02</td>
+                                <td>2021/01/03</td>
+                                <td>2021/01/04</td>
+                                <td>2021/01/05</td>
+                                <td>2021/01/06</td>
+                                <td>2021/01/07</td>
+                                <td>2021/01/08</td>
+                                <td>2021/01/09</td>
+                                <td>2021/01/010</td>
+                                <td>2021/01/011</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>1. 初期処理1</li>
+            </ul>
+        </section>
+        <section type="link"><!-- 1階層_リンク集 -->
+            <title>関連リンク2</title>
+            <ul>
+            </ul>
+        </section><!-- length: 横のセル数、row_size: 縦行数、bg_color: 背景色 -->
+        <!--section type="wireframe" layout="4" title="ワイヤーフレーム">
+            <cell column_size="1">
+                <row column="15" size="2">
+                    <col column_size="2" align="center">
+                        絵
+                    </col>
+                    <col column_size="13">
+                        文字列
+                    </col>
+                </row>
+                <row is_space="True"/>
+                <row column="15" size="2">
+                    <col column_size="2" align="center">
+                        絵
+                    </col>
+                    <col column_size="13">
+                        文字列
+                    </col>
+                </row>
+            </cell>
+        </section>
+        <section type="file">
+            <title>画像一覧</title>
+            <file_list layout_size="8">
+                <file src="./images/square.jpg" />
+                <file src="./images/blue.png" />
+                <file src="./images/green.png" />
+                <file src="./images/orange.png" />
+                <file src="./images/purple.png" />
+                <file src="./images/red.png" />
+                <file src="./images/skybule.png" />
+                <file src="./images/orange.png" />
+                <file src="./images/purple.png" />
+                <file src="./images/red.png" />
+                <file src="./images/skybule.png" />
+            </file_list>
+        </section>
+        <section type="file">
+            <title>画像一覧</title>
+            <file_list layout_size="1">
+                <file src="./images/orange.png" />
+                <file src="./images/blue.png" />
+                <file src="./images/green.png" />
+                <file src="./images/purple.png" />
+            </file_list>
+        </section>
+        <section type="file">
+            <title>画像一覧</title>
+            <file_list layout_size="2">
+                <file src="./images/square.jpg" />
+                <file src="./images/blue.png" />
+                <file src="./images/green.png" />
+                <file src="./images/red.png" />
+                <file src="./images/purple.png" />
+                <file src="./images/red.png" />
+                <file src="./images/skybule.png" />
+            </file_list>
+        </section>
+        <section type="file">
+            <title>画像一覧</title>
+            <file_list layout_size="3">
+                <file src="./images/square.jpg" />
+                <file src="./images/blue.png" />
+                <file src="./images/green.png" />
+                <file src="./images/red.png" />
+                <file src="./images/purple.png" />
+                <file src="./images/red.png" />
+                <file src="./images/skybule.png" />
+            </file_list>
+        </section>
+        <section type="file">
+            <title>画像一覧</title>
+            <file_list layout_size="4">
+                <file src="./images/square.jpg" />
+                <file src="./images/blue.png" />
+                <file src="./images/green.png" />
+                <file src="./images/red.png" />
+                <file src="./images/purple.png" />
+                <file src="./images/red.png" />
+                <file src="./images/skybule.png" />
+                <file src="./images/square.jpg" />
+                <file src="./images/blue.png" />
+                <file src="./images/green.png" />
+                <file src="./images/red.png" />
+                <file src="./images/purple.png" />
+                <file src="./images/red.png" />
+                <file src="./images/skybule.png" />
+            </file_list>
+        </section-->
+    </body>
+</sheet>

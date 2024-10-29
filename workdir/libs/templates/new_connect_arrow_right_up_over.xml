@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing"
+    xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+    <xdr:twoCellAnchor>
+        <xdr:from>
+            <xdr:col>7</xdr:col>
+            <xdr:colOff>863600</xdr:colOff>
+            <xdr:row>6</xdr:row>
+            <xdr:rowOff>63500</xdr:rowOff>
+        </xdr:from>
+        <xdr:to>
+            <xdr:col>9</xdr:col>
+            <xdr:colOff>742950</xdr:colOff>
+            <xdr:row>31</xdr:row>
+            <xdr:rowOff>69850</xdr:rowOff>
+        </xdr:to>
+        <xdr:cxnSp macro="">
+            <xdr:nvCxnSpPr>
+                <xdr:cNvPr id="5" name="カギ線コネクタ 4">
+                    <a:extLst>
+                        <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                            <a16:creationId
+                                xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main"
+                                id="{4E859952-CE0C-5758-3B14-59CB7F2D9D77}" />
+                        </a:ext>
+                    </a:extLst>
+                </xdr:cNvPr>
+                <xdr:cNvCxnSpPr>
+                    <a:stCxn id="3" idx="3" />
+                    <a:endCxn id="2" idx="0" />
+                </xdr:cNvCxnSpPr>
+            </xdr:nvCxnSpPr>
+            <xdr:spPr>
+                <a:xfrm flipV="1">
+                    <a:off x="7531100" y="1587500" />
+                    <a:ext cx="1784350" cy="6356350" />
+                </a:xfrm>
+                <a:prstGeom prst="bentConnector4">
+                    <a:avLst>
+                        <a:gd name="adj1" fmla="val 206762" />
+                        <a:gd name="adj2" fmla="val 103596" />
+                    </a:avLst>
+                </a:prstGeom>
+                <a:ln>
+                    <a:tailEnd type="triangle" />
+                </a:ln>
+            </xdr:spPr>
+            <xdr:style>
+                <a:lnRef idx="1">
+                    <a:schemeClr val="dk1" />
+                </a:lnRef>
+                <a:fillRef idx="0">
+                    <a:schemeClr val="dk1" />
+                </a:fillRef>
+                <a:effectRef idx="0">
+                    <a:schemeClr val="dk1" />
+                </a:effectRef>
+                <a:fontRef idx="minor">
+                    <a:schemeClr val="tx1" />
+                </a:fontRef>
+            </xdr:style>
+        </xdr:cxnSp>
+        <xdr:clientData />
+    </xdr:twoCellAnchor>
+</xdr:wsDr>

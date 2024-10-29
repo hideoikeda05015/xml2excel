@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing"
+    xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+    <xdr:twoCellAnchor>
+        <xdr:from>
+            <xdr:col>3</xdr:col>
+            <xdr:colOff>673100</xdr:colOff>
+            <xdr:row>4</xdr:row>
+            <xdr:rowOff>101600</xdr:rowOff>
+        </xdr:from>
+        <xdr:to>
+            <xdr:col>6</xdr:col>
+            <xdr:colOff>177800</xdr:colOff>
+            <xdr:row>6</xdr:row>
+            <xdr:rowOff>228600</xdr:rowOff>
+        </xdr:to>
+        <xdr:sp macro="" textlink="">
+            <xdr:nvSpPr>
+                <xdr:cNvPr id="2" name="テキスト ボックス 1">
+                    <a:extLst>
+                        <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                            <a16:creationId
+                                xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main"
+                                id="{988E0EC2-266B-E670-0EE6-56AF0AEBC5B7}" />
+                        </a:ext>
+                    </a:extLst>
+                </xdr:cNvPr>
+                <xdr:cNvSpPr txBox="1" />
+            </xdr:nvSpPr>
+            <xdr:spPr>
+                <a:xfrm>
+                    <a:off x="3530600" y="1117600" />
+                    <a:ext cx="2362200" cy="635000" />
+                </a:xfrm>
+                <a:prstGeom prst="rect">
+                    <a:avLst />
+                </a:prstGeom>
+                <a:solidFill>
+                    <a:schemeClr val="lt1" />
+                </a:solidFill>
+                <a:ln w="9525" cmpd="sng">
+                    <a:solidFill>
+                        <a:schemeClr val="tx1" />
+                    </a:solidFill>
+                </a:ln>
+            </xdr:spPr>
+            <xdr:style>
+                <a:lnRef idx="0">
+                    <a:scrgbClr r="0" g="0" b="0" />
+                </a:lnRef>
+                <a:fillRef idx="0">
+                    <a:scrgbClr r="0" g="0" b="0" />
+                </a:fillRef>
+                <a:effectRef idx="0">
+                    <a:scrgbClr r="0" g="0" b="0" />
+                </a:effectRef>
+                <a:fontRef idx="minor">
+                    <a:schemeClr val="dk1" />
+                </a:fontRef>
+            </xdr:style>
+            <xdr:txBody>
+                <a:bodyPr vertOverflow="overflow" horzOverflow="overflow" wrap="square" rtlCol="0"
+                    anchor="ctr" />
+                <a:lstStyle />
+                <a:p>
+                    <a:pPr algn="ctr" />
+                    <a:r>
+                        <a:rPr kumimoji="1" lang="ja-JP" altLang="en-US" sz="1100" />
+                        <a:t>テスト</a:t>
+                    </a:r>
+                </a:p>
+            </xdr:txBody>
+        </xdr:sp>
+        <xdr:clientData />
+    </xdr:twoCellAnchor>
+</xdr:wsDr>

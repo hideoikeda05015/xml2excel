@@ -1,0 +1,11 @@
+jupyterlab
+openpyxl
+xmltodict
+dicttoxml
+Pillow
+iplantuml
+ipydrawio
+ipydrawio-export
+lark
+tqdm
+python-Levenshtein
